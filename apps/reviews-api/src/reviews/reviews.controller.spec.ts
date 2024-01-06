@@ -81,13 +81,27 @@ describe('ReviewsController', () => {
 	});
 
 	describe('getReviews()', () => {
-		it.todo('should fetch all reviews');
+		it('should fetch all reviews', async () => {
+			const response = await request(app.getHttpServer()).get('/reviews');
+			expect(response.status).toBe(200);
+		});
 
-		it.todo('should fetch reviews in descending order by date');
+		it('should fetch reviews in descending order by date', async () => {
+			const response = await request(app.getHttpServer()).get('/reviews');
+			const firstDate = new Date(response.body.reviews[0].createdOn).getTime();
+			const secondDate = new Date(response.body.reviews[1].createdOn).getTime();
+			expect(firstDate).toBeGreaterThan(secondDate);
+		});
 
-		it.todo('should include user data with review');
+		it('should include user data with review', async () => {
+			const response = await request(app.getHttpServer()).get('/reviews');
+			expect(response.body.reviews[0].user.id).toEqual(user2Id);
+		});
 
-		it.todo('should include company data with review');
+		it('should include company data with review', async () => {
+			const response = await request(app.getHttpServer()).get('/reviews');
+			expect(response.body.reviews[0].company.id).toEqual(company1Id);
+		});
 
 		// Feel free to add any additional tests you think are necessary
 	});

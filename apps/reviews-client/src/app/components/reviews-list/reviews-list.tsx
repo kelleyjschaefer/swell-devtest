@@ -18,23 +18,25 @@ export function ReviewsList(props: ReviewsListProps) {
 	const noReviewsMessage = 'No reviews found.';
 	if (props.reviews.length > 0) {
 		const reviewsList = props.reviews.map((review) => (
-			<Card variant="outlined" style={{ margin: '25px', padding: '15px' }}>
-				<Typography variant="h2">{review.company.name}</Typography>
-				<Typography variant="h4">
-					{review.user.firstName} {review.user.lastName}
-				</Typography>
-				<Typography variant="caption"> Created On: {review.createdOn}</Typography>
-				<Divider></Divider>
-				<Typography variant="body2">
-					<Rating value={review.rating} readOnly></Rating>
-				</Typography>
-				<Typography variant="body1">{review.reviewText}</Typography>
-			</Card>
+			<li key={review.id}>
+				<Card variant="outlined" style={{ margin: '25px', padding: '15px' }}>
+					<Typography variant="h2">{review.company.name}</Typography>
+					<Typography variant="h4">
+						{review.user.firstName} {review.user.lastName}
+					</Typography>
+					<Typography variant="caption"> Created On: {review.createdOn}</Typography>
+					<Divider></Divider>
+					<Typography variant="body2">
+						<Rating value={review.rating} readOnly></Rating>
+					</Typography>
+					<Typography variant="body1">{review.reviewText}</Typography>
+				</Card>
+			</li>
 		));
 		return (
 			<div>
 				{props.totalCount} reviews found. <Divider></Divider>
-				{reviewsList}
+				<ul style={{ listStyleType: 'none' }}>{reviewsList}</ul>
 			</div>
 		);
 	} else {

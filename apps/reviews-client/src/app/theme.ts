@@ -95,4 +95,5 @@ export const theme = createTheme({
 			fontSize: 10,
 		},
 	},
+	spacing: 4,
 });
